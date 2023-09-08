@@ -1,0 +1,66 @@
+@import "~bootstrap/scss/bootstrap";
+
+$color-nav-link: #c8c8c8;
+
+.card {
+  width: 18rem;
+  margin: 1rem;
+}
+
+.img-profile {
+  height: 2rem;
+  width: 2rem;
+}
+
+.img-thumbnail {
+  height: 10rem;
+  width: 10rem;
+}
+
+header {
+  background: rgb(255,255,255);
+  background: linear-gradient(189deg, rgba(255,255,255,1) 0%, rgba(52,52,52,1) 100%);
+
+
+  & .navbar-brand {
+    font-weight: bold;
+    color: white;
+    &:hover {
+      color: $color-nav-link;
+    }
+  }
+  & .nav-link {
+    color: white;
+    &:hover {
+      color: $color-nav-link;
+    }
+    &:focus {
+      color: $color-nav-link;
+    }
+  }
+
+  & .dropdown-menu[data-bs-popper] {
+    left: -50%;
+  }
+}
+
+section {
+  & .card {
+    width: fit-content;
+  }
+}
+
+.hide-button-avis {
+  display: none;
+}
+
+.avis {
+  &:hover .hide-button-avis  {
+    display: inline-block;
+  }
+
+  &:focus .hide-button-avis  {
+    display: inline-block;
+  }
+
+}

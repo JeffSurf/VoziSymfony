@@ -1,0 +1,43 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block contenu %}
+    <div class="container">
+        <h1>Liste des applications</h1>
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <table class="table table-responsive table-striped">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Url</th>
+                <th>IP</th>
+                <th>Port</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for application in applications %}
+                <tr>
+                    <td>{{ application.nom }}</td>
+                    <td>{{ application.description }}</td>
+                    <td>{{ application.url }}</td>
+                    <td>{{ application.ip }}</td>
+                    <td>{{ application.port }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_application_editer', {'id': application.id}) }}" class="btn btn-primary">Modifier</a>
+                        <a href="{{ path('app_admin_application_supprimer', {'id': application.id}) }}" class="btn btn-danger">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

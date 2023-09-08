@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes applis{% endblock %}
+
+{% block header %}
+    {{ include('fragments/header.html.twig') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <a class="btn btn-primary" href="{{ path('app_utilisateur_apps_add') }}">Ajouter une application</a>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    Nom
+                </th>
+                <th>
+                    URL
+                </th>
+                <th>
+                    Port
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for application in app.user.applications %}
+
+                <tr>
+                    <td>{{ application.nom }}</td>
+                    <td><a href="//{{ application.ip }}:{{ application.port }}" target="_blank">{{ application.url }}</a></td>
+                    <td>{{ application.port }}</td>
+                    <td>
+                        <a href="{{ path('app_utilisateur_apps_update', {id: application.id}) }}" class="btn btn-primary">Modifier</a>
+                        <a href="{{ path('app_utilisateur_delete', {'id': application.id}) }}" class="btn btn-danger">Supprimer</a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

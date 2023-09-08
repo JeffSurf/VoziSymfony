@@ -1,0 +1,14 @@
+<div class="col-4">
+    <div class="card">
+        <h5 class="card-header">{{ application.nom }}</h5>
+        <img src="{{ application.image ? asset('uploads/'~application.image) : asset('build/images/colorBar.jpg') }}" class="card-img-top" alt="présentation">
+        <div class="card-body">
+            <a class="card-title" target="_blank" href="//{{ [application.ip, application.port]|join(':') }}">{{ application.url }}</a>
+            <p class="card-text">{{ application.description }}</p>
+            <p class="card-text">créée par {{ application.utilisateur.nom|upper }} {{ application.utilisateur.prenom }}</p>
+            <div class="card-footer">
+                <a href="{{ path('app_application_voir', {'id': application.id}) }}" class="btn btn-outline-info">Infos et avis</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voir une app{% endblock %}
+
+{% block header %}
+    {{ include('fragments/header.html.twig') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-dark rounded box-shadow">
+            <div class="lh-100 text-white">
+                <h2>{{ application.nom }}</h2>
+                <small>Fait par {{ application.utilisateur.nom|upper }} {{ application.utilisateur.prenom }}</small>
+            </div>
+        </div>
+        <p>
+            {{ application.description }}
+        </p>
+        <div class="row shadow p-3 mb-5 bg-white rounded">
+            <a class="btn btn-primary" href="{{ path('app_avis_create', {'idApp': application.id}) }}">Ajouter un avis</a>
+                <div class="my-3 p-3 bg-light rounded box-shadow">
+                    <h6 class="border-bottom border-gray pb-2 mb-0">Avis récents</h6>
+                    {{ application.avis.count == 0 ? "Aucun avis" : "" }}
+                    {% for avis in application.avis|reverse %}
+                        <div class="avis media text-muted pt-3">
+                            <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32" class="mr-2 rounded" style="width: 32px; height: 32px;" src="{{ avis.utilisateur.image ? asset('uploads/'~avis.utilisateur.image) : asset('build/images/avatarDefault.png') }}" data-holder-rendered="true">
+                            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                <strong class="d-block text-gray-dark">@{{ avis.utilisateur.pseudo }}</strong>
+                                {{ avis.message }}
+                                <br>
+                                {% if app.user and app.user.id == avis.utilisateur.id %}
+                                    <a href="{{ path('app_avis_update', {'idAvis': avis.id }) }}" class="btn btn-outline-primary hide-button-avis">✏</a>
+                                    <a href="{{ path('app_avis_delete', {'idAvis': avis.id }) }}" class="btn btn-outline-danger hide-button-avis">❌</a>
+                                {% endif %}
+                                <small class="text-muted">Le {{ avis.datePublication|format_datetime('medium', 'medium', locale='fr') }}</small>
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Eleves{% endblock %}
+
+{% block header %}
+    {{ include('fragments/header.html.twig') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2>Les élèves</h2>
+        <div class="row">
+            {% for eleve in eleves %}
+                {{ include('fragments/eleveCard.html.twig', [eleve]) }}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

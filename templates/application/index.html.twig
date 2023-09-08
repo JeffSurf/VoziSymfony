@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Apps{% endblock %}
+
+{% block header %}
+    {{ include('fragments/header.html.twig') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2>Les applications</h2>
+        <div class="row shadow p-3 mb-5 bg-white rounded">
+            {% for application in applications %}
+                {{ include('fragments/appCard.html.twig', [application]) }}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block contenu %}
+    <div class="container">
+        <h1>Liste des utilisateurs</h1>
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <table class="table table-responsive table-striped">
+            <thead>
+            <tr>
+                <th>Pseudo</th>
+                <th>Application</th>
+                <th>Message</th>
+                <th>Date de publication</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for avis_item in avis %}
+                <tr>
+                    <td>{{ avis_item.utilisateur.pseudo }}</td>
+                    <td>{{ avis_item.application.nom }}</td>
+                    <td>{{ avis_item.message }}</td>
+                    <td>{{ avis_item.datePublication|format_datetime('medium', 'medium', locale='fr') }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_avis_delete', {'id': avis_item.id}) }}" class="btn btn-danger">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer le profil{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Modifier le profil</h1>
+
+        {{ form_start(profilForm) }}
+
+        <div class="row">
+            <div class="col-4">
+                {{ form_row(profilForm.nom) }}
+            </div>
+
+            <div class="col-4">
+                {{ form_row(profilForm.prenom) }}
+            </div>
+
+            <div class="col-4">
+                {{ form_row(profilForm.pseudo) }}
+            </div>
+
+            <div class="col-4">
+                {{ form_row(profilForm.email) }}
+            </div>
+
+            <div class="col-4">
+                {{ form_row(profilForm.image) }}
+                <img src="{{ app.user.image ? asset('uploads/'~app.user.image) : asset('build/images/avatarDefault.png') }}" class="img-thumbnail" alt="avatar">
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">Soumettre</button>
+
+        {{ form_end(profilForm) }}
+    </div>
+
+{% endblock %}

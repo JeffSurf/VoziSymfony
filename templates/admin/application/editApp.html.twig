@@ -1,0 +1,35 @@
+{% extends 'admin/baseAdmin.html.twig' %}
+
+{% block contenu %}
+    <div class="container">
+        <h2>Editer l'application</h2>
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-3">
+                {{ form_row(form.nom) }}
+            </div>
+            <div class="col-3">
+                {{ form_row(form.description) }}
+            </div>
+            <div class="col-3">
+                {{ form_row(form.url) }}
+            </div>
+            <div class="col-3">
+                {{ form_row(form.ip) }}
+            </div>
+            <div class="col-3">
+                {{ form_row(form.port) }}
+            </div>
+            <div class="col-3">
+                {{ form_row(form.image) }}
+            </div>
+            <div class="col-3">
+                <label class="form-label">actuel</label>
+                <br>
+                <img src="{{ current_application.image ? asset('uploads/'~current_application.image) : asset('build/images/colorBar.jpg') }}" class="img-thumbnail" alt="avatar">
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

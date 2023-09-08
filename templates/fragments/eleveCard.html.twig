@@ -1,0 +1,11 @@
+<div class="col-4">
+    <div class="card">
+        <h5 class="card-header">{{ eleve.pseudo }}</h5>
+        <img src="{{ eleve.image ? asset('uploads/'~eleve.image) : asset('build/images/avatarDefault.png') }}" class="card-img-top" alt="présentation">
+        <div class="card-body">
+            <p class="card-text">{{ eleve.prenom }} {{ eleve.nom|upper }}</p>
+            <p class="card-text">Nombre d'apps: {{ eleve.applications.count }}</p>
+            <a href="{{ path('app_eleve_info', {'id': eleve.id}) }}" class="btn btn-primary">Voir les apps</a>
+        </div>
+    </div>
+</div>

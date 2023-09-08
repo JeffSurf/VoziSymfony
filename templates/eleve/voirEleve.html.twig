@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voir un élève{% endblock %}
+
+{% block header %}
+    {{ include('fragments/header.html.twig') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ eleve.pseudo }}</h1>
+        <div class="row">
+            <blockquote class="blockquote">{{ eleve.nom|upper }} {{ eleve.prenom }}</blockquote>
+        </div>
+        <img src="{{ eleve.image ? asset('uploads/'~eleve.image) : asset('build/images/avatarDefault.png') }}" class="img-thumbnail" alt="profil">
+        <hr class="border border-primary border-3 opacity-75">
+        <div class="row shadow p-3 mb-5 bg-white rounded">
+            {% if eleve.applications.count == 0 %}
+                <h2>Pas d'applications</h2>
+            {% else %}
+                <h2>Liste des applications</h2>
+            {% endif %}
+            {% for application in eleve.applications %}
+                {{include('fragments/appCard.html.twig', [application]) }}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    images_dir: '%kernel.project_dir%/public/uploads'
 
 services:
     # default configuration for services in *this* file
@@ -19,6 +20,27 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%images_dir%'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    twig.extension.date:
+        class: Jasny\Twig\DateExtension
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.pcre:
+        class: Jasny\Twig\PcreExtension
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.text:
+        class: Jasny\Twig\TextExtension
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.array:
+        class: Jasny\Twig\ArrayExtension
+        tags:
+            - { name: twig.extension }
