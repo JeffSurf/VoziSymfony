@@ -85,6 +85,7 @@ class AvisController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
+            $avis->setDatePublication(new \DateTime());
             $em->persist($avis);
             $em->flush();
 
